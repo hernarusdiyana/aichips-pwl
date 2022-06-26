@@ -41,15 +41,18 @@ class Auth extends BaseController
                 if (empty($user)) {
                     $respon = [
                         'validasi' => true,
-                        'error' => ['username' => 'Username tidak terdaftar!']
+                        'error' => ['username' => 'Username tidak terdaftar!'],
+                        'pesan' => '<span class="badge badge-danger">Username Salah :(</span>'
                     ];
                 } else {
                     // jika password tidak sama
                     if (!verifikasi_password($this->request->getPost('password'), $user->password)) {
                         $respon = [
                             'validasi' => true,
-                            'error' => ['password' => 'Password tidak sesuai!']
+                            'error' => ['password' => 'Password tidak sesuai!'],
+                            'pesan' => '<span class="badge badge-danger">Password Salah :(</span>'
                         ];
+        
                     } else {
                         // login sukses set session user
                         $data = [
@@ -61,7 +64,7 @@ class Auth extends BaseController
                             'validasi' => true,
                             'sukses' => true,
                             'aksi' => 'login',
-                            'pesan' => 'Login berhasil!'
+                            'pesan' => 'Login berhasil!',
                         ];
                     }
                 }

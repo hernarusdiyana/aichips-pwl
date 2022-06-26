@@ -49,7 +49,7 @@
                         <button type="button" class="btn btn-social-icon-text btn-warning" onclick="bukaModalKeranjang()"><i class="mdi mdi-cart-outline"></i>Keranjang <b id="jmlPesanan">(0)</b></button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-social-icon-text btn-google" onclick="location.href = '/auth';"><i class="mdi mdi-account-check"></i>Pegawai</button>
+                        <button type="button" class="btn btn-social-icon-text btn-google" onclick="bukaModalLogin()"><i class="mdi mdi-account-check"></i>Pegawai</button>
                     </li>
                 </ul>
             </div>
@@ -273,17 +273,18 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Login admin.</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Login Pegawai.</h5>
                             </div>
                             <div class="modal-body">
                                 <div id="errorLogin" class="mb-3"></div>
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <select id="idUser" class="form-control text-dark">
-                                            <?php for ($i = 0; $i < count($user); $i++) {
-                                                echo "<option value='" . $user[$i]["id"] . "'>" . $user[$i]["nama"] . "</option>";
-                                            } ?>
-                                        </select>
+                                          <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-warning text-white">Password</span>
+                                        </div>
+                                        <input type="text" id="username" name='username' class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -291,13 +292,13 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text bg-warning text-white">Password</span>
                                         </div>
-                                        <input type="password" id="pass" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                        <input type="password" id="password" name='password' class="form-control" aria-label="Amount (to the nearest dollar)">
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" onclick="tutupModalLogin()">Batal</button>
-                                <button type="button" class="btn btn-warning" onclick="login()" id="simpanTransaksi">Log in</button>
+                                <button type="submit" class="btn btn-warning" onclick="login()" id="login">Log in</button>
                             </div>
                         </div>
                     </div>
@@ -322,28 +323,28 @@
                 $("#modalLogin").modal("show")
             }
 
-            // function login() {
-            //     idUser = $("#idUser").val()
-            //     pass = $("#pass").val()
+            function login() {
+                username = $("#username").val()
+                password = $("#password").val()
 
-            //     if ($("#pass").val() == "") {
-            //         $("#pass").focus();
-            //     } else {
-            //         $.ajax({
-            //             type: 'POST',
-            //             data: 'idUser=' + idUser + '&pass=' + pass,
-            //             url: '<?= base_url() ?>/dashboard2/auth',
-            //             dataType: 'json',
-            //             success: function(data) {
-            //                 if (data == "") {
-            //                     window.location.href = "antrian";
-            //                 } else {
-            //                     $("#errorLogin").html(data)
-            //                 }
-            //             }
-            //         });
-            //     }
-            // }
+                if ($("#password").val() == "") {
+                    $("#password").focus();
+                } else {
+                    $.ajax({
+                        type: 'POST',
+                        data: 'username=' + username + '&password=' + password,
+                        url: '<?= base_url() ?>/auth/proses',
+                        dataType: 'json',
+                        success: function(respon) {
+                            if (respon.sukses == true && respon.pesan == "Login berhasil!") {
+                                window.location.href = "dashboard";
+                            } else {
+                                $("#errorLogin").html(respon.pesan)
+                            }
+                        }
+                    });
+                }
+            }
 
             function prosesTransaksi() {
                 var nama = $('#nama').val();
