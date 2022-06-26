@@ -1,3 +1,4 @@
+
 <?= $this->extend('auth/auth_template'); ?>
 <?= $this->section('auth'); ?>
 
@@ -40,9 +41,7 @@
             </div>
             <!-- /.col -->
         </div>
-        <?= form_close(); ?>
-        <hr>
-        <a href="<?= base_url('auth/lupa-password') ?>">Lupa Password!</a>
+
     </div>
     <!-- /.login-card-body -->
 </div>

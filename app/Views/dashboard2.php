@@ -49,7 +49,7 @@
                         <button type="button" class="btn btn-social-icon-text btn-warning" onclick="bukaModalKeranjang()"><i class="mdi mdi-cart-outline"></i>Keranjang <b id="jmlPesanan">(0)</b></button>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="btn btn-social-icon-text btn-google" onclick="bukaModalLogin()"><i class="mdi mdi-account-check"></i>Admin</button>
+                        <button type="button" class="btn btn-social-icon-text btn-google" onclick="location.href = '/auth';"><i class="mdi mdi-account-check"></i>Pegawai</button>
                     </li>
                 </ul>
             </div>
@@ -322,28 +322,28 @@
                 $("#modalLogin").modal("show")
             }
 
-            function login() {
-                idUser = $("#idUser").val()
-                pass = $("#pass").val()
+            // function login() {
+            //     idUser = $("#idUser").val()
+            //     pass = $("#pass").val()
 
-                if ($("#pass").val() == "") {
-                    $("#pass").focus();
-                } else {
-                    $.ajax({
-                        type: 'POST',
-                        data: 'idUser=' + idUser + '&pass=' + pass,
-                        url: '<?= base_url() ?>/dashboard2/auth',
-                        dataType: 'json',
-                        success: function(data) {
-                            if (data == "") {
-                                window.location.href = "antrian";
-                            } else {
-                                $("#errorLogin").html(data)
-                            }
-                        }
-                    });
-                }
-            }
+            //     if ($("#pass").val() == "") {
+            //         $("#pass").focus();
+            //     } else {
+            //         $.ajax({
+            //             type: 'POST',
+            //             data: 'idUser=' + idUser + '&pass=' + pass,
+            //             url: '<?= base_url() ?>/dashboard2/auth',
+            //             dataType: 'json',
+            //             success: function(data) {
+            //                 if (data == "") {
+            //                     window.location.href = "antrian";
+            //                 } else {
+            //                     $("#errorLogin").html(data)
+            //                 }
+            //             }
+            //         });
+            //     }
+            // }
 
             function prosesTransaksi() {
                 var nama = $('#nama').val();

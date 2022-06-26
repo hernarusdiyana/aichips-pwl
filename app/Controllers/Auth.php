@@ -19,7 +19,7 @@ class Auth extends BaseController
         if (is_login()) {
             return redirect()->to('dashboard');
         }
-        echo view('auth/login', ['title' => 'Login Admin']);
+        echo view('auth/login', ['title' => 'Login Pegawai']);
     }
 
     public function proses()
